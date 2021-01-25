@@ -24,6 +24,23 @@ int max(int a, int b) {
     return a > b ? a : b; 
 }
 
+// some other examples
+char* revString(char* str, char* res) {
+    int len = strlen(str);
+    for (int i = len - 1; i >= 0; i--) {
+        res[i] = str[(len - 1) - i];
+    }
+    res[len+1] = '\0';
+    return res;
+}
+
+void swap(int* p_a, int* p_b) {
+    int tmp = *p_a;
+    *p_b = *p_a;
+    *p_a = tmp;
+}
+
+
 /* 
 A function invocation, like max(a, b), is converted to a pointer-to-function at 
 compile time, the number and type (excluding coercion) of arguments must be the 

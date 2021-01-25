@@ -48,32 +48,3 @@ int main(void) {
     }
     return 0;
 }
-
-// function
-int sum(int a, int b) { 
-    return a + b; 
-}
-
-// if cond
-int divide(int a, int b) {
-    if (!b) { // equal to b == 0
-        return -1;
-    }
-    return a / b;
-}
-
-
-char* revString(char* str, char* res) {
-    int len = strlen(str);
-    for (int i = len - 1; i >= 0; i--) {
-        res[i] = str[(len - 1) - i];
-    }
-    res[len+1] = '\0';
-    return res;
-}
-
-void swap(int* p_a, int* p_b) {
-    int tmp = *p_a;
-    *p_b = *p_a;
-    *p_a = tmp;
-}
