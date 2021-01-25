@@ -1,5 +1,7 @@
-int sum(int a, int b);
-int divide(int a, int b);
+// functions
+void swap(int* p_a, int* p_b);
+int max(int a, int b);
+
 bool isDivisibleBy(int a, int b);
 char* revString(char* str, char* res);
 void chars(void);
