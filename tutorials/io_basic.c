@@ -33,6 +33,7 @@ by POSIX, Windows, and other platforms to perform I/O in real-world
 applications.
 */
 
+
 ///////////////////////// BUFFERING & TYPES
 /* 
 Buffering is the process of temporarily storing data in main memory that’s
@@ -85,11 +86,11 @@ to the end of the stream.
 
 
 
-///////////////////////// OPENING, CREATING and CLOSING FILEs /////////////////////////
+///////////////////////// OPENING, CREATING, CLOSING FILEs /////////////////////////
 // When you open or create a file, it’s associated with a stream.
 
-// FOPEN & FCLOSE (general)
-/* 
+///////////////////////// FOPEN & FCLOSE (GENERAL)
+/*
 The fopen function opens the file whose name is given as a string and
 pointed to by filename, and then associates a stream with it. If the file
 doesn’t already exist, fopen will create it:
@@ -113,6 +114,12 @@ r+b or rb+      Open existing binary file for update (reading and writing)
 w+b or wb+      Truncate to zero length or create binary file for reading and writing
 a+b or ab+      Append; open or create binary file for update, writing at current end-of-file
 
+wx              Create exclusive text file for writing
+wbx             Create exclusive binary file for writing
+w+x             Create exclusive text file for reading and writing
+w+bx or wb+x    Create exclusive binary file for reading and writing
+
+
 To close a file:
 
     int fclose(FILE *stream);
@@ -133,7 +140,7 @@ void createFileGeneral(void) {
     char path[] = "./new_file.txt";
     FILE *f = fopen(path, "w+");
     if (f == NULL) {
-        perror("faile to open file: ");
+        perror("failed to open file: ");
         return;
     }
     if (fclose(f) != 0) {
@@ -141,7 +148,7 @@ void createFileGeneral(void) {
     }
 }
 
-// posix OPEN & CLOSE
+///////////////////////// POSIX OPEN & CLOSE
 /*
 On POSIX systems, the open function establishes the connection between a file 
 identified by path and a value called a file descriptor:
@@ -287,7 +294,7 @@ occurs; otherwise, it returns zero.
 
 
 
-//////////////// POSITION IN A FILE
+///////////////////////// POSITION IN A FILE /////////////////////////
 /*
 Random-access files (which include a disk file, for example, but not a termi-
 nal) maintain a file position indicator associated with the stream. The file
@@ -349,17 +356,13 @@ In POSIX, the file deletion function is named unlink:
     int unlink(const char *path);
 */
 
+
+
 ///////////////////////// TMP FILES /////////////////////////
 /*
 These files are normally created in a temporary directory by using functions 
 such as the C Standard Library’s tmpfile and tmpnam or POSIX’s mkstemp.
 */
-
-
-
-
-
-
 
 
 ///////////////////////// READING FROM TEXT STREAMS /////////////////////////
