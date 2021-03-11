@@ -414,10 +414,10 @@ void fscanfEx(void) {
     printf("RESULT: %d\n", status);
 }
 
-// nextSubStr splits the str string using the provided 
-// delimiter, putting the first substring in the piece
+// nextSubStr splits the 'str' string using the provided 
+// delimiter, putting the first substring in the 'piece'
 // string array, removing it from the original string.
-// If there's no match all string is moved to the piece one
+// If there's no match all string is moved to the 'piece' one
 void nextSubStr(char *str, char *piece, char *delim) {
     char* subPtr = strstr(str, delim);
     bool found = true;
