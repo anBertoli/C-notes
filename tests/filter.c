@@ -56,7 +56,7 @@ int main(void) {
         {.age = 26, .name = "Andrea"},
         {.age = 23, .name = "Luca"},
         {.age = 43, .name = "Matteo"},
-        {.age = 35, .name = "Giovanni"},
+        {.age = 65, .name = "Giovanni"},
         {.age = 67, .name = "Bruno"},
     };
 
