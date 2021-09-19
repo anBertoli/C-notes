@@ -1,4 +1,6 @@
-tmp/*
+tmp
 .vscode
 main
 .DS_Store
+.idea
+bin
