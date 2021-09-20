@@ -64,7 +64,6 @@ void print_uint_representation(void) {
     print_uint(17);
     print_uint(255);
     print_uint(UINT_MAX);
-    print_uint(-1);
 };
 
 
@@ -132,6 +131,14 @@ void uint_wraparound(int a, int b, int j, int i) {
  * following example.
  */
 
+void int_types(void) {
+    signed char a = 1;
+    signed short b = 2;
+    signed int c = 3;
+    signed long d = 4;
+    signed long long e = 5;
+}
+
 void int_limits(void) {
     printf("%d\n", SCHAR_MIN);      // --> signed char, –128 (8 bits), –127 min from standard (8 bits)
     printf("%d\n", SCHAR_MAX);      // --> signed char, 127 (8 bits), 127 min from standard (8 bits)
@@ -160,6 +167,11 @@ void int_limits(void) {
  * Unsigned integers have well-defined wraparound behavior. Signed integer
  * overflow, or the possibility of it, should always be considered a defect.
  */
+
+void int_overflow(void) {
+    print_uint(INT_MAX);           // --> num: '2147483647'  ---> 01111111111111111111111111111111
+    print_uint(INT_MAX + 1);    // --> num: '-2147483648' ---> 10000000000000000000000000000000
+}
 
 /*
  * Integer literals. C has three kinds of integer constants that use
@@ -267,6 +279,12 @@ void float_representation(void) {
  * Casting to wider types always works with no loss of precision. When casting
  * to a type with less precision the result of the conversion might not be
  * equal to the original value.
+ *
+ * There are 3 concepts important that determine if the conversion happens and
+ * in which direction: Integer Conversion Rank, Integer Promotions, Usual
+ * Arithmetic Conversions. Then depending on the implementation, the conversion
+ * is done following specific rules (e.g. uint to int reinterprets the same bits
+ * as the new type).
  */
 
 void explicit_cast(void) {
@@ -276,19 +294,35 @@ void explicit_cast(void) {
 
     // Potential information loss.
     int c = 14;
-    unsigned short d = (unsigned short)(c);
+    short d = (short)c;
 }
 
 /*
  * Implicit conversion, also known as coercion, occurs automatically in
  * expressions as required. This happens, for example, when operations
  * are performed on mixed types.
+ *
+ * The same rules are applied: Integer Conversion Rank, Integer Promotions,
+ * Usual Arithmetic Conversions. The following example demonstrates an
+ * implicit conversion. The variable c is of type signed char. Because signed
+ * char has a lower integer conversion rank than int or unsigned int, the
+ * value stored in c is promoted to an object of type signed int when used
+ * in the comparison. This is accomplished by sign-extending the original
+ * value of 0xFF to 0xFFFFFFFF.
+ *
+ * ext, the usual arithmetic conversions are applied. Because the operands to
+ * the equal (==) operator have different signedness and equal rank, the
+ * operand with the signed integer type is converted to the type of the
+ * operand with the unsigned integer type. Because UINT_MAX has the same
+ * values as the promoted and converted value of c, the result is true.
  */
 
 void implicit_coercion(void) {
-    int a = 3;
-    short b = 3;
-    printf("%d", a + b);
+    unsigned int ui = UINT_MAX;
+    signed char c = -1;
+    if (c == ui) {
+        puts("-1 equals 4,294,967,295");
+    }
 }
 
 
