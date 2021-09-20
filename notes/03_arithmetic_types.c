@@ -50,10 +50,28 @@ void uint_types(void) {
  *
  */
 
+void print_long(unsigned long int a) {
+    printf("as unsigned long: '%lu', as signed long: '%ld' ---> ", a, (signed long int)a);
+    for (int i = 63; i >= 0; i--) {
+        unsigned long int buf = a & (1UL << i);
+        printf("%c", buf == 0 ? '0' : '1');
+    }
+    printf("\n");
+}
+
 void print_uint(unsigned int a) {
-    printf("num: '%d' ---> ",a );
+    printf("as unsigned int: '%d', as signed int: '%d' ---> ", a, (signed int)a);
     for (int i = 31; i >= 0; i--) {
-        int buf = a & (1 << i);
+        int buf = a & (1U << i);
+        printf("%c", buf == 0 ? '0' : '1');
+    }
+    printf("\n");
+}
+
+void print_uchar(unsigned char a) {
+    printf("as unsigned char: '%d', as signed char: '%d' ---> ", a, (char)a);
+    for (int i = 7; i >= 0; i--) {
+        int buf = a & (1U << i);
         printf("%c", buf == 0 ? '0' : '1');
     }
     printf("\n");
@@ -152,8 +170,8 @@ void int_limits(void) {
     printf("%ld\n", LONG_MIN);      // --> long signed int, -9223372036854775808 (64 bits), -2147483647 min from standard (32 bits)
     printf("%ld\n", LONG_MAX);      // --> long signed int, 9223372036854775807 (64 bits),  2147483647 min from standard (32 bits)
 
-    printf("%lld\n", LLONG_MIN);    // --> long long signed int, -9223372036854775808 (64 bits), -9223372036854775807 min from standard 64 bits
-    printf("%lld\n", LLONG_MAX);    // --> long long signed int, 9223372036854775807 (64 bits), 9223372036854775807 min from standard 64 bits
+    printf("%lld\n", LLONG_MIN);    // --> long long signed int, -9223372036854775808 (64 bits), -9223372036854775807 min from standard (64 bits)
+    printf("%lld\n", LLONG_MAX);    // --> long long signed int, 9223372036854775807 (64 bits), 9223372036854775807 min from standard (64 bits)
 }
 
 /*
@@ -170,7 +188,7 @@ void int_limits(void) {
 
 void int_overflow(void) {
     print_uint(INT_MAX);           // --> num: '2147483647'  ---> 01111111111111111111111111111111
-    print_uint(INT_MAX + 1);    // --> num: '-2147483648' ---> 10000000000000000000000000000000
+    // overflows: print_uint(INT_MAX + 1);    // --> num: '-2147483648' ---> 10000000000000000000000000000000
 }
 
 /*
@@ -323,6 +341,21 @@ void implicit_coercion(void) {
     if (c == ui) {
         puts("-1 equals 4,294,967,295");
     }
+}
+
+void implicit_coercion_2(void) {
+    signed char c;
+    signed int i = INT_MAX;
+    signed long k;
+    print_uint(i);
+
+    // i is truncated
+    c = i;
+    print_uchar(c);
+
+    // i is truncated before being extended
+    k = (c = i);
+    print_long(k);
 }
 
 
