@@ -61,12 +61,16 @@ void alignof_operator(void) {
     long int arr2[4];
     printf("Alignment of arr = %zu\n", alignof(arr));
     printf("Alignment of arr2 = %zu\n", alignof(arr2));
-    printf("Alignment of max_align_t = %zu\n", alignof(max_align_t));
+    printf("Alignment of long long int = %zu\n", alignof(long long int));
     printf("Alignment of char = %zu\n", alignof(char));
     printf("Alignment of int = %zu\n", alignof(int));
     printf("Alignment of struct {int c; char v} = %zu\n", alignof(struct {
         int c;
-        float v;
+        char v;
+    }));
+    printf("Alignment of struct {char v; int c} = %zu\n", alignof(struct {
+        char v;
+        int c;
     }));
 }
 

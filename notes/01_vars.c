@@ -34,20 +34,22 @@ void use_pointers(void) {
  * Objects have a storage duration that determines their lifetime. Altogether,
  * four storage durations are available: automatic, static, thread, and allocated.
  *
- * - AUTOMATIC: objects declared within a block or as a function parameter, the
- *              lifetime of these objects begins when the block in which they’re declared begins execution,
- *              and ends when execution of the block ends
+ * - AUTOMATIC: objects declared within a block or as a function parameter, the lifetime of these
+ *              objects begins when the block in which they’re declared begins execution, and
+ *              ends when execution of the block ends.
  *
  * - STATIC:    objects declared in file scope have static storage duration. The lifetime of these
  *              objects is the entire execution of the program, and their stored value is initialized
  *              prior to program startup. You can also declare a variable within a block scope to have
  *              static storage duration by using the storage class specifier static.
  *
- * - ALLOCATED: objects dynamically allocated using functions like malloc, calloc, realloc. The lifetime
- *              of these objects begins when the allocation occurs and ends when the objects are manually
- *              freed (with the free function).
+ * - ALLOCATED: objects dynamically allocated using functions like malloc, calloc, realloc. The
+ *              lifetime of these objects begins when the allocation occurs and ends when the
+ *              objects are manually deallocated (with the free function). Dynamically allocated
+ *              memory is allocated from the heap, which is simply one or more large, subdividable
+ *              blocks of memory that are managed by the memory manager.
  *
- * - THREAD:    storage duration is used in concurrent programming.
+ * - THREAD:    thread storage duration is used in concurrent programming.
  *
  * Scope and lifetime are entirely different concepts. Scope applies to identifiers,
  * whereas lifetime applies to objects. The scope of an identifier is the code region
