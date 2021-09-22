@@ -16,4 +16,6 @@ test:
 		./notes/06_type_qualifiers.c \
 		./notes/07_expr_ops.c \
 		./notes/08_dyn_alloc.c	\
+		./notes/09_chars_strings.c	\
+		./notes/10_input_output.c	\
 		-o ./tmp/test/main && ./tmp/test/main && rm ./tmp/test/main
